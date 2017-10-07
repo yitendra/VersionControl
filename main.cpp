@@ -13,12 +13,13 @@ int main()
 system("COLOR f0");
 
 	ifstream file1("file1.txt"),file2("file2.txt");
-	string f1,f2;
+	string f1,f2;int count=1;
 	while(getline(file1,f1) && getline(file2,f2)){
-        if(f1==f2){printInRed("Match");}
+        if(f1==f2){cout<<count<<" ";cout<<f1<<endl;}
         else{
-               printInGreen("No match");
-        }}
+               cout<<count<<" ";cout<<"(-)"<<f1<<endl<<count<<" (+)"<<f2<<endl;
+        }
+        count++;}
         cout<<"Testing";
 
         return 0;
