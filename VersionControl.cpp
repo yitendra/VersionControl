@@ -23,16 +23,18 @@ system("COLOR f0");
         if(f2!=""){temp2[j]=f2;j++;}
     }
 compare(temp1,temp2);
-
+    int h;cin>>h;
 }
 
 void printInGreen(string a){
     SetConsoleTextAttribute(console, 242);
+    a.insert(0,1,'+');
     cout<<a<<endl;
     SetConsoleTextAttribute(console, 240);
 }
 void printInRed(string a){
     SetConsoleTextAttribute(console, 252);
+    a.insert(0,1,'-');
     cout<<a<<endl;
     SetConsoleTextAttribute(console, 240);
 }
@@ -42,11 +44,22 @@ void compare(string *a, string *b){
         if(a[i]==b[j]){
             cout<<a[i]<<endl;i++;j++;
         }else{
-            a[i].insert(0,1,'-');
-            b[j].insert(0,1,'+');
-            printInRed(a[i]);i++;
-            printInGreen(b[j]);j++;
+            int scan =j; bool found=0;
+            while(b[scan]!=""){
+                if(a[i]==b[scan]){found=1;break;}
+                scan++;
+            }
+            if(!found){
+                    printInRed(a[i]);i++;
+                }else{
+                    for(j; j<scan; j++){
+                        printInGreen(b[j]);
+                        }
+                    }
         }
+            if(a[i]=="" && b[j]!=""){
+                printInGreen(b[j]);j++;
+            }
     }
 }
 
