@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <windows.h>
+#include <conio.h>
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);   //Used printing in color
 //color code=> 242 for green and 252 for red and 240 for black.
@@ -13,7 +14,7 @@ int main()
 
 system("COLOR f0");
 
-	ifstream file1("file1.txt"),file2("file2.txt");
+	ifstream file1("old.txt"),file2("new.txt");
 	string f1,f2,temp1[100],temp2[100];
 	int i=1,j=1;
 	while(getline(file1,f1)){
@@ -23,7 +24,7 @@ system("COLOR f0");
         if(f2!=""){temp2[j]=f2;j++;}
     }
 compare(temp1,temp2);
-    int h;cin>>h;
+    getch();
 }
 
 void printInGreen(string a){
