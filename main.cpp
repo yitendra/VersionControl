@@ -6,15 +6,14 @@ using namespace std;
 void compare();
 void editFile();
 void saveFile();
-void isDifferent();
-
+bool isSame();
 
 int main()
 {
-    cout<<"testing\n";
+    /*isSame();
+    system("del old.txt")*/
     compare();
     system("main.bat");
-
     return 0;
 }
 
@@ -24,8 +23,31 @@ void compare(){
 }
 
 void editFile(){
-    ofstream file("main.bat");
-    file<<"echo off\ncls\nnotepad file.txt";
-    cout<<"Opening File...\n";
+   system("notepad file.txt");
 }
 
+bool isSame(){
+    system("copy data\\old.txt");
+    system("cls");
+    ifstream file("file.txt"),old("old.txt");
+    string a,b;bool flag=true;
+    while(getline(file,a) && getline(old,b)){
+        if(a!=b){return false;
+        flag = false;
+
+        break;}
+    }
+    return flag;
+}
+
+void saveFile(){
+    if(isSame()){
+        cout<<"No Changes were made.\n";
+    }else{
+        //save old to log++.txt
+
+        //save new to old.txt
+
+        //save file to new.txt
+    }
+}
