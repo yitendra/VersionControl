@@ -1,10 +1,9 @@
 Hello World!
 This is a version control project.
 Made by two Developers.
-Yitendra Kumar
-and
+Yitendra Kumar and
 Sishub Kumar Joshi
-
+This line is added for testing.
 Thanks!
 
-Testing some features.Y
+Program successfully made.

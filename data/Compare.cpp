@@ -11,10 +11,19 @@ void compare(string *a, string *b);
 
 int main()
 {
-
 system("COLOR f0");
+    //getting versions
 
-	ifstream file1("old.txt"),file2("new.txt");
+    int version;
+    char Old[10]="", New[10]="";
+    ifstream ver("vc.log");
+        ver>>New>>Old;
+        char txt[] = ".txt";
+        strcat(New,txt);
+        strcat(Old,txt);
+
+    //geting comparable files
+	ifstream file1(Old),file2(New);
 	string f1,f2,temp1[100],temp2[100];
 	int i=1,j=1;
 	while(getline(file1,f1)){
@@ -25,6 +34,7 @@ system("COLOR f0");
     }
 compare(temp1,temp2);
     getch();
+
 }
 
 void printInGreen(string a){
