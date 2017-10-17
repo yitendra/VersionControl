@@ -13,8 +13,6 @@ int main()
 {
 system("COLOR f0");
     //getting versions
-
-    int version;
     char Old[10]="", New[10]="";
     ifstream ver("vc.log");
         ver>>New>>Old;
@@ -24,7 +22,7 @@ system("COLOR f0");
 
     //geting comparable files
 	ifstream file1(Old),file2(New);
-	string f1,f2,temp1[100],temp2[100];
+	string f1,f2,temp1[1000],temp2[1000];
 	int i=1,j=1;
 	while(getline(file1,f1)){
         if(f1!=""){temp1[i]=f1;i++;}
@@ -34,6 +32,8 @@ system("COLOR f0");
     }
 compare(temp1,temp2);
     getch();
+    system("cls");
+    system("COLOR 0f");
 }
 
 void printInGreen(string a){
@@ -68,7 +68,8 @@ void compare(string *a, string *b){
                     }
         }
             if(a[i]=="" && b[j]!=""){
-                printInGreen(b[j]);j++;
+                  while(b[j]!=""){
+                printInGreen(b[j]);j++;}
             }
     }
 }
