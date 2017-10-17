@@ -1,5 +1,0 @@
- Press '1' to compare
- Press '2' to open notepad 
- Press '3' to save file
-
- New help commands will be updated soon;

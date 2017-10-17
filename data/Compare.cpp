@@ -62,5 +62,6 @@ void compare(string *a, string *b){
                 printInGreen(b[j]);j++;
             }
     }
+
 }
 
