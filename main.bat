@@ -1,4 +1,4 @@
 echo off
 cls
-cd data
-compare.exe
+copy data\02.txt
+rename 02.txt old.txt
