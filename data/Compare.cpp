@@ -34,7 +34,6 @@ system("COLOR f0");
     }
 compare(temp1,temp2);
     getch();
-
 }
 
 void printInGreen(string a){
