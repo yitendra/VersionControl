@@ -10,16 +10,15 @@ void compare();
 void editFile();
 void saveFile();
 bool isSame();
+void bringOld();
+void saveNupdate();
 void show();
 void check();
 
 int main()
 {
-    saveFile();
-    check();
-
-    //compare();
-    //system("main.bat");
+    //check();
+    saveNupdate();
     return 0;
 
 }
@@ -34,20 +33,6 @@ void compare(){
 void editFile(){
    system("notepad file.txt");
 }
-
-void bringOld(){
-     int version;
-    char New[10]="";
-    ifstream ver("vc.log");
-        ver>>New;
-        char txt[] = ".txt";
-        strcat(New,txt);
-    ofstream fileO("main.bat");
-    fileO<<"echo off\ncls\n";
-    fileO<<"copy data\\"<<New<<endl;
-    fileO<<"rename "<<New<<" old.txt";
-}
-
 
 bool isSame(){
     bringOld();
@@ -68,10 +53,9 @@ void saveFile(){
     if(isSame()){
         cout<<"No Changes were made.\n";
     }else{
+        cout<<"Changes Found\n";
     //copy file.txt to data
-
     //rename file.txt to X.txt X=version
-
     //update both vc.log
     }
     system("del old.txt");
@@ -96,16 +80,46 @@ void show(){
 }
 
 void check(){
-    cout<<"Press '--help' to view the commands\n\n";
+    cout<<"Press '--help' to view the commands\n";
     s:
-    cout<<endl<<"~$ ";
+    cout<<"~$ ";
         cin>>command;
 
-    if(command=="compare"){compare();system("main.bat");}
+    if(command=="compare"){compare();system("main.bat");system("del main.bat");}
     else if(command=="edit")editFile();
     else if(command=="save")saveFile();
-    else if(command=="clear"){system("cls");goto s;}
+    else if(command=="clear"){system("cls");}
+    else if(command=="exit"){goto Exit;}
     else if(command=="--help"){cout<<" Type 'compare' to compare old and new file\n Type 'edit' to open notepad\n Type 'save' to save the file\n New help commands will be updated soon;\n";goto s;}
-    else {cout<<"'"<<command<<"' is not recognized as an internal or external command,\noperable program or batch file."<<endl;
-    goto s;}
+    else {cout<<"'"<<command<<"' is not recognized as an internal or external command,\noperable program or batch file."<<endl;}
+    goto s;
+    Exit: cout<<"EXIT";
+}
+
+
+void bringOld(){
+    char New[10]="";
+    ifstream ver("vc.log");
+        ver>>New;
+        char txt[] = ".txt";
+        strcat(New,txt);
+    ofstream fileO("main.bat");
+    fileO<<"echo off\ncls\n";
+    fileO<<"copy data\\"<<New<<endl;
+    fileO<<"rename "<<New<<" old.txt";
+}
+
+void saveNupdate(){
+    ofstream file("main.bat");
+    //copy file.txt to data folder
+    file<<"xcopy file.txt data\\"<<endl;
+    //update vc.log
+    int Old,New;
+    ifstream ver("vc.log");
+        ver>>New>>Old;
+        ++New;++Old;
+        cout<<New<<" "<<Old<<endl;
+    //getting versions.txt
+
+
 }
