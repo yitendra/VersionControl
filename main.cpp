@@ -101,8 +101,8 @@ void check(){
         cin>>command;
 
     if(command=="compare"){compare();system("main.bat");}
-    else if(command=="edit")editFile();
-    else if(command=="save")saveFile();
+    else if(command=="edit"){editFile();goto s;}
+    else if(command=="save"){saveFile();goto s;}
     else if(command=="clear"){system("cls");goto s;}
     else if(command=="--help"){cout<<" Type 'compare' to compare old and new file\n Type 'edit' to open notepad\n Type 'save' to save the file\n New help commands will be updated soon;\n";goto s;}
     else {cout<<"'"<<command<<"' is not recognized as an internal or external command,\noperable program or batch file."<<endl;
