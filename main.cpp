@@ -3,24 +3,20 @@
 #include <conio.h>
 
 using namespace std;
-//declarations
-string disp,command;
 
 void compare();
 void editFile();
 void saveFile();
 bool isSame();
-void show();
+void bringOld();
+void saveNupdate();
+void about();
 void check();
 
 int main()
 {
-    saveFile();
-    show();
-    //compare();
-    //system("main.bat");
+    check();
     return 0;
-
 }
 
 
@@ -34,23 +30,10 @@ void editFile(){
    system("notepad file.txt");
 }
 
-void bringOld(){
-     int version;
-    char New[10]="";
-    ifstream ver("vc.log");
-        ver>>New;
-        char txt[] = ".txt";
-        strcat(New,txt);
-    ofstream fileO("main.bat");
-    fileO<<"echo off\ncls\n";
-    fileO<<"copy data\\"<<New<<endl;
-    fileO<<"rename "<<New<<" old.txt";
-}
-
-
 bool isSame(){
     bringOld();
     system("main.bat");
+    system("del main.bat");
     system("cls");
     ifstream file("file.txt"),old("old.txt");
     string a,b;bool flag=true;
@@ -65,46 +48,81 @@ bool isSame(){
 
 void saveFile(){
     if(isSame()){
-        cout<<"This is just a placeholder for testing by my co-developer YITENDRA KUMAR\n";
+        cout<<"No Changes were made.\n";
     }else{
+        cout<<"Changes Found\n";
     //copy file.txt to data
-
     //rename file.txt to X.txt X=version
-
     //update both vc.log
+    saveNupdate();
+    system("main.bat");
     }
     system("del old.txt");
 }
 
-void show(){
+void about(){string disp;
+    system("cls");
     ifstream doc("README.md");
     while(getline(doc,disp)){
         cout<<disp<<endl;
     }doc.close();
-    l:
-    cout<<endl<<"~$ ";
-    cin>>command;
-    if(command=="Start"){
-        system("cls");
-    }else{
-        cout<<"'"<<command<<"' is not recognized as an internal or external command,\noperable program or batch file."<<endl;
-        goto l;
-    }
+    cout<<"Press any Key";
+    getch();check();
 
-        check();
 }
 
 void check(){
-    cout<<"Press '--help' to view the commands\n\n";
+    system("cls");
+    string command;
+    cout<<"Press '--help' to view the commands\n";
     s:
-    cout<<endl<<"~$ ";
+    cout<<"~$ ";
         cin>>command;
 
-    if(command=="compare"){compare();system("main.bat");}
-    else if(command=="edit"){editFile();goto s;}
-    else if(command=="save"){saveFile();goto s;}
-    else if(command=="clear"){system("cls");goto s;}
-    else if(command=="--help"){cout<<" Type 'compare' to compare old and new file\n Type 'edit' to open notepad\n Type 'save' to save the file\n New help commands will be updated soon;\n";goto s;}
-    else {cout<<"'"<<command<<"' is not recognized as an internal or external command,\noperable program or batch file."<<endl;
-    goto s;}
+    if(command=="compare"){compare();system("main.bat");system("del main.bat");}
+    else if(command=="edit"){editFile();cout<<endl;}
+    else if(command=="save")saveFile();
+    else if(command=="clear"){system("cls");}
+    else if(command=="about"){about();}
+    else if(command=="exit"){goto Exit;}
+    else if(command=="--help"){cout<<" Type 'compare' to compare with previous file\n Type 'edit' to open notepad\n Type 'save' to save the file\n Type 'about' to know about the Project\n Type 'exit' to EXIT\n New help commands will be updated soon;\n";goto s;}
+    else {cout<<"'"<<command<<"' is not recognized as an internal or external command,\noperable program or batch file."<<endl;}
+    goto s;
+    Exit: cout<<"EXIT";
+}
+
+
+void bringOld(){
+    char New[10]="";
+    ifstream ver("vc.log");
+        ver>>New;
+        char txt[] = ".txt";
+        strcat(New,txt);
+    ofstream fileO("main.bat");
+    fileO<<"echo off\ncls\n";
+    fileO<<"copy data\\"<<New<<endl;
+    fileO<<"rename "<<New<<" old.txt";
+}
+
+void saveNupdate(){
+
+    //update vc.log
+    int Old,New;
+    ifstream ver("vc.log");
+        ver>>New>>Old;
+        ++New;++Old;
+    ofstream verw("vc.log");
+        verw<<"0"<<New<<endl;
+        verw<<"0"<<Old;
+    //copy file.txt to data folder
+    system("xcopy file.txt data\\");
+    //renaming file.txt to latest version
+    //updating vc.log of data
+    ofstream file("main.bat");
+    file<<"echo off\n";
+    file<<"del data\\vc.log"<<endl;
+    file<<"xcopy vc.log data\\"<<endl;
+    file<<"cd data\n";
+    file<<"rename file.txt 0"<<New<<".txt";
+    //call main.bat after calling this fn.
 }
