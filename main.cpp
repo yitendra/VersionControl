@@ -60,31 +60,34 @@ void saveFile(){
     system("del old.txt");
 }
 
-void about(){
-    string disp;
+
+void about(){string disp;
+    system("cls");
     ifstream doc("README.md");
     while(getline(doc,disp)){
         cout<<disp<<endl;
     }doc.close();
 }
 
+
 void check(){
+    system("cls");
     string command;
     cout<<"Press '--help' to view the commands\n";
     s:
     cout<<"~$ ";
         cin>>command;
-
     if(command=="compare"){compare();system("main.bat");system("del main.bat");}
     else if(command=="edit")editFile();
+    else if(command=="edit"){editFile();cout<<endl;}
     else if(command=="save")saveFile();
     else if(command=="clear"){system("cls");}
     else if(command=="about"){about();}
     else if(command=="exit"){goto Exit;}
-    else if(command=="--help"){cout<<" Type 'compare' to compare with previous file\n Type 'edit' to open notepad\n Type 'save' to save the file\n Type 'about' to know about us\n Type 'exit' to EXIT\n New help commands will be updated soon;\n";goto s;}
+    else if(command=="--help"){cout<<" Type 'compare' to compare with previous file\n Type 'edit' to open notepad\n Type 'save' to save the file\n Type 'about' to know about the Project\n Type 'exit' to EXIT\n New help commands will be updated soon;\n";}
     else {cout<<"'"<<command<<"' is not recognized as an internal or external command,\noperable program or batch file."<<endl;}
     goto s;
-    Exit: cout<<"EXIT";
+    Exit:system("cls");
 }
 
 
