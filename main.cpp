@@ -1,9 +1,10 @@
 #include <bits/stdc++.h>
+#include <sys/stat.h>
 #include <windows.h>
 #include <conio.h>
 
 using namespace std;
-
+void init();
 void compare();
 void editFile();
 void saveFile();
@@ -12,22 +13,41 @@ void bringOld();
 void saveNupdate();
 void about();
 void check();
+bool fileExist(const string& name);
 
 int main()
 {
+    init();
     check();
     return 0;
 }
 
 
 void compare(){
-    ofstream file("main.bat");
-    file<<"echo off\ncls\ncd data\ncompare.exe";
+    ofstream comp("main.bat");
+    comp<<"echo off\ncls\ncd data\ncompare.exe";
     //Use system("main.bat"); after calling this fn.
 }
 
 void editFile(){
    system("notepad file.txt");
+}
+void init(){
+    //initializing Version Control.
+    if(fileExist("vc.log")){cout<<"Version Control is already initialized.\n";}
+    else{
+        //make vc.log files.
+        ofstream vc("vc.log");
+        vc<<"00";
+        ofstream vc2("data/vc.log");
+        vc2<<"00";
+        //make file.txt and version 00.txt
+        ofstream v0("data/00.txt");
+        v0<<"Version 0.0 for testing";
+        ofstream initfile("file.txt");
+        initfile<<"//This is your first version";
+        cout<<"Version Control Initialized.\n";
+    }
 }
 
 bool isSame(){
@@ -57,7 +77,10 @@ void saveFile(){
     saveNupdate();
     system("main.bat");
     }
+    system("cls");
+    cout<<"File Saved.\n";
     system("del old.txt");
+
 }
 
 
@@ -108,11 +131,14 @@ void saveNupdate(){
     //update vc.log
     int Old,New;
     ifstream ver("vc.log");
-        ver>>New>>Old;
-        ++New;++Old;
+        ver>>New;
+        Old=New;
+        ++New;
     ofstream verw("vc.log");
-        verw<<"0"<<New<<endl;
-        verw<<"0"<<Old;
+        if(New<=9){verw<<"0"<<New<<endl;}
+        else verw<<New<<endl;
+        if(Old<=9){verw<<"0"<<Old;}
+        else verw<<Old;
     //copy file.txt to data folder
     system("xcopy file.txt data\\");
     //renaming file.txt to latest version
@@ -122,6 +148,12 @@ void saveNupdate(){
     file<<"del data\\vc.log"<<endl;
     file<<"xcopy vc.log data\\"<<endl;
     file<<"cd data\n";
-    file<<"rename file.txt 0"<<New<<".txt";
+    if(New<=9){file<<"rename file.txt 0"<<New<<".txt";}
+    else{file<<"rename file.txt "<<New<<".txt";}
     //call main.bat after calling this fn.
+}
+
+bool fileExist(const string& name) {
+  struct stat buffer;
+  return (stat (name.c_str(), &buffer) == 0);
 }
