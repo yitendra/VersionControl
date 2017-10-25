@@ -43,9 +43,9 @@ void init(){
         vc2<<"00";
         //make file.txt and version 00.txt
         ofstream v0("data/00.txt");
-        v0<<"Version 0.0 for testing";
+        v0<<"#include <iostream>\n\nusing namespace std;\nint main(){\ncout<<\"Hello world!\"<<endl;\nreturn 0;\n}";
         ofstream initfile("file.txt");
-        initfile<<"//This is your first version";
+        initfile<<"#include <iostream>\n\nusing namespace std;\nint main(){\ncout<<\"Hello world!\"<<endl;\nreturn 0;\n}";
         cout<<"Version Control Initialized.\n";
     }
 }
@@ -98,7 +98,7 @@ void check(){
     string command;
     cout<<"Press '--help' to view the commands\n";
     s:
-    cout<<"~$ ";
+    cout<<"\n~$ ";
         cin>>command;
     if(command=="compare"){compare();system("main.bat");system("del main.bat");}
     else if(command=="edit")editFile();
