@@ -27,7 +27,7 @@ void compare(){
     ofstream comp("main.bat");
     comp<<"echo off\ncls\ncd data\ncompare.exe";
     //Use system("main.bat"); after calling this fn.
-}
+    }
 
 void editFile(){
    system("notepad file.txt");
@@ -76,9 +76,9 @@ void saveFile(){
     //update both vc.log
     saveNupdate();
     system("main.bat");
-    }
     system("cls");
     cout<<"File Saved.\n";
+    }
     system("del old.txt");
 
 }

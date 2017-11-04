@@ -8,6 +8,10 @@ using namespace std;
 void printInGreen(string);
 void printInRed(string);
 void compare(string *a, string *b);
+void greyT();
+void restoreT();
+void greenT();
+void redT();
 
 int main()
 {
@@ -34,7 +38,9 @@ compare(temp1,temp2);
     getch();
     system("cls");
     system("COLOR 0f");
+
 }
+//Enf of Main function
 
 void printInGreen(string a){
     SetConsoleTextAttribute(console, 242);
@@ -49,10 +55,16 @@ void printInRed(string a){
     SetConsoleTextAttribute(console, 240);
 }
 void compare(string *a, string *b){
+    SetConsoleTextAttribute(console, 176);
+    cout<<"  Old   New   Content "<<setw(30)<<setfill(' ')<<" "<<endl;
+    restoreT();
     int i=1,j=1;
     while(a[i]!="" && b[j]!=""){
         if(a[i]==b[j]){
-            cout<<a[i]<<endl;i++;j++;
+                greyT();
+            cout<<" "<<setw(3)<<i<<"   "<<setw(3)<<j;
+            restoreT();
+            cout<<"    "<<a[i]<<endl;i++;j++;
         }else{
             int scan =j; bool found=0;
             while(b[scan]!=""){
@@ -60,17 +72,43 @@ void compare(string *a, string *b){
                 scan++;
             }
             if(!found){
+                    redT();
+                    cout<<" "<<setw(3)<<i<<"      ";
+                    restoreT();
+                    cout<<"    ";
                     printInRed(a[i]);i++;
                 }else{
                     for(j; j<scan; j++){
+                            greenT();
+                     cout<<"       "<<setw(3)<<j;
+                    restoreT();
+                     cout<<"    ";
                         printInGreen(b[j]);
                         }
                     }
         }
             if(a[i]=="" && b[j]!=""){
                   while(b[j]!=""){
+                        greenT();
+                cout<<"       "<<setw(3)<<j;
+                restoreT;
+                cout<<"    ";
                 printInGreen(b[j]);j++;}
             }
     }
+}
+
+//247=grey,
+void greyT(){
+SetConsoleTextAttribute(console, 247);
+}
+void restoreT(){
+SetConsoleTextAttribute(console, 240);
+}
+void greenT(){
+SetConsoleTextAttribute(console, 168);
+}
+void redT(){
+SetConsoleTextAttribute(console, 203);
 }
 
